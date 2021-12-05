@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourierTransfrom", "FourierTransfrom\FourierTransfrom.csproj", "{3BEB049D-79E0-4DAA-B62D-BAD0C93FCC57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourierTransform.Imaging", "FourierTransform.Imaging\FourierTransform.Imaging.csproj", "{B789ACE0-7375-44F8-9515-2FCD4E8A67A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BEB049D-79E0-4DAA-B62D-BAD0C93FCC57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BEB049D-79E0-4DAA-B62D-BAD0C93FCC57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BEB049D-79E0-4DAA-B62D-BAD0C93FCC57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BEB049D-79E0-4DAA-B62D-BAD0C93FCC57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B789ACE0-7375-44F8-9515-2FCD4E8A67A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B789ACE0-7375-44F8-9515-2FCD4E8A67A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B789ACE0-7375-44F8-9515-2FCD4E8A67A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B789ACE0-7375-44F8-9515-2FCD4E8A67A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B48B3EB-A104-433F-B3CE-D88E98B35048}
+	EndGlobalSection
+EndGlobal
