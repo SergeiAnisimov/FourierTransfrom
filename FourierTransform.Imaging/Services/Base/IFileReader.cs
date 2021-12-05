@@ -2,7 +2,7 @@
 
 namespace FourierTransform.Imaging.Services.Base
 {
-    internal interface IFileReader
+    public interface IFileReader
     {
         Bitmap Read(string path);
     }

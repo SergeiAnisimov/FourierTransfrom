@@ -6,7 +6,7 @@ namespace FourierTransform.Imaging.Services.Base
     /// <summary>
     /// Reads all pixel in bitmap memory
     /// </summary>
-    internal interface IBitmapReader
+    public interface IBitmapReader
     {
         /// <summary>
         /// Locks bitmap bits, than read all pixel from memory

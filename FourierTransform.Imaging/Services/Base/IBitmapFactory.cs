@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace FourierTransform.Imaging.Services.Base
 {
-    internal interface IBitmapFactory
+    public interface IBitmapFactory
     {
         Bitmap Create(NormalizedColor[][] colors, PixelFormat pixelFormat);
     }

@@ -6,7 +6,7 @@ namespace FourierTransform.Imaging.Models
     /// Represents rgb color scheme
     /// with componenets between 0 and 1
     /// </summary>
-    internal struct NormalizedColor
+    public struct NormalizedColor
     {
         [Range(0, 1)]
         public double R { get; init; }
