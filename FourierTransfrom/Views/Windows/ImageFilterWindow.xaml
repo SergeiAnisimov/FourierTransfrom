@@ -1,0 +1,58 @@
+﻿<Window x:Class="FourierTransfrom.Views.Windows.ImageFilterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:FourierTransfrom.BindingConverters"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="ImageFilterWindow" 
+        Height="450" 
+        Width="800"
+        DataContext="{Binding Source={StaticResource Kernel}, Path=ImageFilterViewModel}"
+        AllowDrop="True">
+    <Window.Resources>
+        <converters:HalfConverter x:Key="HalfConverter"/>
+    </Window.Resources>
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Drop">
+            <behaviors:InvokeCommandAction Command="{Binding DropCommand}"
+                                           PassEventArgsToCommand="True"/>
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top"
+                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=Width, Converter={StaticResource HalfConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Left">
+            <ComboBox ItemsSource="{Binding Filters}"
+                      SelectedIndex="0"
+                      Margin="20"/>
+        </StackPanel>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+            <ProgressBar DockPanel.Dock="Top"
+                         Margin="20"
+                         Value="{Binding ProgressValue, UpdateSourceTrigger=PropertyChanged}"/>
+            <StatusBar>
+                <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
+            </StatusBar>
+        </DockPanel>
+        <UniformGrid Rows="0" Columns="2">
+            <Border DockPanel.Dock="Left">
+                <Image Source="{Binding Input, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+            <Border DockPanel.Dock="Right">
+                <Image Source="{Binding Output, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+            <UniformGrid.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Margin" Value="20"/>
+                    <Setter Property="BorderThickness" Value="4"/>
+                    <Setter Property="BorderBrush" Value="Gainsboro"/>
+                </Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Stretch" Value="Fill"/>
+                </Style>
+            </UniformGrid.Resources>
+        </UniformGrid>
+    </DockPanel>
+</Window>
