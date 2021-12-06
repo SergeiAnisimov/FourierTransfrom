@@ -5,54 +5,140 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:FourierTransfrom.BindingConverters"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:FourierTransfrom.Views.Windows"
         mc:Ignorable="d"
         Title="ImageFilterWindow" 
-        Height="450" 
-        Width="800"
+        Height="768" 
+        Width="1024"
         DataContext="{Binding Source={StaticResource Kernel}, Path=ImageFilterViewModel}"
-        AllowDrop="True">
+        AllowDrop="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None"
+        AllowsTransparency="True">
     <Window.Resources>
         <converters:HalfConverter x:Key="HalfConverter"/>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
     </Window.Resources>
+
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="Drop">
             <behaviors:InvokeCommandAction Command="{Binding DropCommand}"
                                            PassEventArgsToCommand="True"/>
         </behaviors:EventTrigger>
     </behaviors:Interaction.Triggers>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="{Binding ElementName=Grid, Path=ActualHeight, UpdateSourceTrigger=PropertyChanged}"
+                      ResizeBorderThickness="5"
+                      CornerRadius="5"/>
+    </WindowChrome.WindowChrome>
+
     <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top"
-                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=Width, Converter={StaticResource HalfConverter}, UpdateSourceTrigger=PropertyChanged}"
+
+        <UniformGrid DockPanel.Dock="Top"
+                     Columns="2"
+                     Rows="1"
+                     WindowChrome.IsHitTestVisibleInChrome="True"
+                     x:Name="Grid">
+            <TextBlock Margin="10"
+                       HorizontalAlignment="Left"
+                       Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ImageFilterWindow}, Path=Title}"
+                       Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+            <StackPanel HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <Button Command="{Binding MinimizeCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ImageFilterWindow}, BindsDirectlyToSource=True, UpdateSourceTrigger=PropertyChanged}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="HorizontalLine"/>
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ImageFilterWindow}, BindsDirectlyToSource=True, UpdateSourceTrigger=PropertyChanged}">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="WindowClose"/>
+                    </Button.Content>
+                </Button>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}"
+                           BasedOn="{StaticResource MaterialDesignFlatButton}">
+                        <Setter Property="Margin"
+                                Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
+            </StackPanel>
+        </UniformGrid>
+        
+        <DockPanel LastChildFill="True">
+
+            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                <StackPanel DockPanel.Dock="Top"
+                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=ActualWidth, Converter={StaticResource HalfConverter}, UpdateSourceTrigger=PropertyChanged}"
                     HorizontalAlignment="Left">
-            <ComboBox ItemsSource="{Binding Filters}"
-                      SelectedIndex="0"
-                      Margin="20"/>
-        </StackPanel>
-        <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
-            <ProgressBar DockPanel.Dock="Top"
+                    <ComboBox ItemsSource="{Binding Filters}"
+                          SelectedIndex="0"
+                          Margin="20, 20, 20, 10"
+                          x:Name="Filters"
+                          FontSize="25"/>
+                </StackPanel>
+
+                <UniformGrid Margin="20, 10, 20, 20" 
+                         Columns="3">
+                    <Button Content="Add Filter"
+                            Command="{Binding AddFilterCommand}"
+                            CommandParameter="{Binding ElementName=Filters, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0, 0, 10, 0"/>
+                    <Button Content="Clear Filters"
+                            Command="{Binding ClearFiltersCommand}"
+                            Margin="10, 0, 10, 0"/>
+                    <Button Content="Filtrate"
+                        Margin="10, 0, 0, 0"
+                        Command="{Binding FiltrateCommand}"/>
+                </UniformGrid>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+                <ProgressBar DockPanel.Dock="Top"
                          Margin="20"
                          Value="{Binding ProgressValue, UpdateSourceTrigger=PropertyChanged}"/>
-            <StatusBar>
-                <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
-            </StatusBar>
+                <StatusBar Background="{DynamicResource MaterialDesignBackgroundPaper}"
+                       Foreground="{DynamicResource MaterialDesignBody}">
+                    <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                               Margin="10"/>
+                    <TextBlock Margin="10"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                               Text="{Binding Pipeline, UpdateSourceTrigger=PropertyChanged}"/>
+                </StatusBar>
+            </DockPanel>
+
+            <UniformGrid Rows="0" Columns="2">
+                <Border DockPanel.Dock="Left">
+                    <Image Source="{Binding Input, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+                <Border DockPanel.Dock="Right">
+                    <Image Source="{Binding Output, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+                <UniformGrid.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Margin" Value="20"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                        <Setter Property="BorderBrush" Value="Gainsboro"/>
+                    </Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Stretch" Value="Fill"/>
+                    </Style>
+                </UniformGrid.Resources>
+            </UniformGrid>
+
         </DockPanel>
-        <UniformGrid Rows="0" Columns="2">
-            <Border DockPanel.Dock="Left">
-                <Image Source="{Binding Input, UpdateSourceTrigger=PropertyChanged}"/>
-            </Border>
-            <Border DockPanel.Dock="Right">
-                <Image Source="{Binding Output, UpdateSourceTrigger=PropertyChanged}"/>
-            </Border>
-            <UniformGrid.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="Margin" Value="20"/>
-                    <Setter Property="BorderThickness" Value="4"/>
-                    <Setter Property="BorderBrush" Value="Gainsboro"/>
-                </Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Stretch" Value="Fill"/>
-                </Style>
-            </UniformGrid.Resources>
-        </UniformGrid>
     </DockPanel>
 </Window>

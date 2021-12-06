@@ -19,6 +19,7 @@ namespace FourierTransfrom.IoCService
             Bind<IBitmapFactory>().To<BitmapFactory>().InTransientScope();
             Bind<IColorFilter>().To<ColorFilter>().InTransientScope();
             
+            Bind<IFilterFactory>().To<FilterFactory>().InTransientScope();
             Bind<IFileValidator>().To<FileValidator>().InTransientScope();
             Bind<IBitmapConverter>().To<BitmapConverter>().InTransientScope();
             Bind<IFilterConveyor>().To<FilterConveyor>().InTransientScope();

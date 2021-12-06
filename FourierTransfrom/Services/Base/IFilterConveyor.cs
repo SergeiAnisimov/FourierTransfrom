@@ -8,6 +8,8 @@ namespace FourierTransfrom.Services.Base
         void AddFilter(Func<int, int, double> fiterKernel);
 
         void ClearFilters();
+
+        bool IsEmpty { get; }
         
         Bitmap Filter(string pathToImage);
     }

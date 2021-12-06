@@ -2,6 +2,13 @@
 {
     internal enum Filter
     {
-        Gauss
+        Gauss,
+        Analising1,
+        Analising2,
+        Contr1,
+        Contr2,
+        Differential,
+        Prewitt,
+        Sobel
     }
 }

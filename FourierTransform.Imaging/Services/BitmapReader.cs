@@ -64,9 +64,9 @@ namespace FourierTransform.Imaging.Services
         private NormalizedColor CreateColor(byte r, byte g, byte b)
             => new ()
             {
-                R = r / 255,
-                G = g / 255,
-                B = b / 255
+                R = r / 255.0,
+                G = g / 255.0,
+                B = b / 255.0
             };
 
         private ProgressInfo CreateInfo(double percentage)
