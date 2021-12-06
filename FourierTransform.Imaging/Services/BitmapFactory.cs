@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace FourierTransform.Imaging.Services
 {
-    internal class BitmapFactory : IBitmapFactory
+    public class BitmapFactory : IBitmapFactory
     {
         private readonly IProgress<ProgressInfo> _progress;
 

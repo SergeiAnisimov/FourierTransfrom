@@ -1,15 +1,17 @@
 ﻿using FourierTransform.Imaging.Models;
 using FourierTransform.Imaging.Services.Base;
+using Ninject;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace FourierTransform.Imaging.Services
 {
-    internal class BitmapReader : IBitmapReader
+    public class BitmapReader : IBitmapReader
     {
         private readonly IProgress<ProgressInfo> _progress;
 
+        [Inject]
         public BitmapReader(IProgress<ProgressInfo> progress)
         {
             _progress = progress;

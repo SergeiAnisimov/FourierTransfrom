@@ -1,6 +1,6 @@
 ﻿namespace FourierTransform.Imaging.Models
 {
-    internal class ProgressInfo
+    public class ProgressInfo
     {
         public string Stage { get; init; }
 

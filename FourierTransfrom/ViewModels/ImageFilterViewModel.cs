@@ -20,14 +20,19 @@ namespace FourierTransfrom.ViewModels
         // Creates new BitmapSource from given bitmap
         private readonly IBitmapConverter _converter;
 
+        // Applies filters to image colors
+        private readonly IFilterConveyor _filterConveyor;
+
         #endregion Fields
 
         [Inject]
         public ImageFilterViewModel(IFileValidator validator,
-                                    IBitmapConverter converter)
+                                    IBitmapConverter converter,
+                                    IFilterConveyor filterConveyor)
         {
             _validator = validator;
             _converter = converter;
+            _filterConveyor = filterConveyor;
 
             Status = "Inited";
 
