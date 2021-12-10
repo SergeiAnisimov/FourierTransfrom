@@ -100,17 +100,18 @@
                             Command="{Binding ClearFiltersCommand}"
                             Margin="10, 0, 10, 0"/>
                     <Button Content="Filtrate"
-                        Margin="10, 0, 0, 0"
-                        Command="{Binding FiltrateCommand}"/>
+                            Margin="10, 0, 0, 0"
+                            Command="{Binding FiltrateCommand}"/>
                 </UniformGrid>
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
                 <ProgressBar DockPanel.Dock="Top"
-                         Margin="20"
-                         Value="{Binding ProgressValue, UpdateSourceTrigger=PropertyChanged}"/>
+                             Margin="20"
+                             Height="20"
+                             Value="{Binding ProgressValue, UpdateSourceTrigger=PropertyChanged}"/>
                 <StatusBar Background="{DynamicResource MaterialDesignBackgroundPaper}"
-                       Foreground="{DynamicResource MaterialDesignBody}">
+                           Foreground="{DynamicResource MaterialDesignBody}">
                     <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}"
                                Margin="10"/>
