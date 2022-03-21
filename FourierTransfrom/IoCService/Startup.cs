@@ -5,26 +5,17 @@ using FourierTransfrom.Services;
 using FourierTransfrom.Services.Base;
 using FourierTransfrom.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using Ninject;
 using System;
 
 namespace FourierTransfrom.IoCService
 {
-    internal class AppKernel
+    internal class Startup
     {
-        private readonly IKernel _kernel
-            = new StandardKernel(new IoCModule());
+        public IServiceCollection Services { get; }
 
-        private readonly IServiceCollection _services;
-
-        private readonly IServiceProvider _serviceProvider;
-
-        public ImageFilterViewModel ImageFilterViewModel
-            => _serviceProvider?.GetService<ImageFilterViewModel>();
-
-        public AppKernel()
+        public Startup()
         {
-            _services = new ServiceCollection().AddScoped<IFileReader, FileReader>()
+            Services = new ServiceCollection().AddScoped<IFileReader, FileReader>()
                                               .AddScoped<IBitmapReader, BitmapReader>()
                                               .AddScoped<IBitmapFactory, BitmapFactory>()
                                               .AddScoped<IColorFilter, ColorFilter>()
@@ -34,8 +25,6 @@ namespace FourierTransfrom.IoCService
                                               .AddScoped<IFilterConveyor, FilterConveyor>()
                                               .AddScoped<ImageFilterViewModel>()
                                               .AddSingleton<IProgress<ProgressInfo>, Progress<ProgressInfo>>();
-
-            _serviceProvider = _services.BuildServiceProvider();
         }
     }
 }

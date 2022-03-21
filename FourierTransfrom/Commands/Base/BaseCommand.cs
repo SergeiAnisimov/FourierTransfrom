@@ -23,6 +23,8 @@ namespace FourierTransfrom.Commands.Base
 
         public abstract bool CanExecute(object parameter);
 
+#pragma warning disable CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
         public abstract void Execute(object parameter);
+#pragma warning restore CS8767 // Nullability of reference types in type of parameter doesn't match implicitly implemented member (possibly because of nullability attributes).
     }
 }
